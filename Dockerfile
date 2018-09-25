@@ -13,6 +13,7 @@ ENV openwrt_sdk_url=https://downloads.lede-project.org/releases/${openwrt_ver}/t
 WORKDIR /openwrt
 
 RUN wget --tries=3 "${openwrt_sdk_url}" -O /openwrt.tar.xz
+RUN git clone https://git.openwrt.org/openwrt/openwrt.git /openwrt && git checkout openwrt-${openwrt_ver} && rm -rf /openwrt/.git
 RUN tar -xf /openwrt.tar.xz --strip-components 1 && rm /openwrt.tar.xz
 RUN ./scripts/feeds update
 
